@@ -1,0 +1,434 @@
+[
+    {
+        "id": "1",
+        "nome": "Nokia C2-05",
+        "preco": "750",
+        "codigo": "CELNO-20",
+        "estoque": "120",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "preto",
+                    "cinza",
+                    "cinza"
+                ]
+            }
+        ],
+        "image_url": "nokia_c2-05.jpeg"
+    },
+    {
+        "id": "2",
+        "nome": "Nokia X2-05",
+        "preco": "730",
+        "codigo": "CELNO-21",
+        "estoque": "121",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "preto",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_x2-05.jpeg"
+    },
+    {
+        "id": "3",
+        "nome": "Nokia Asha 300",
+        "preco": "700",
+        "codigo": "CELNO-22",
+        "estoque": "122",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "azul",
+                    "preto",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_asha_300.jpeg"
+    },
+    {
+        "id": "4",
+        "nome": "Nokia Asha 303",
+        "preco": "710",
+        "codigo": "CELNO-23",
+        "estoque": "123",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "branco",
+                    "vermelho",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_asha_303.jpeg"
+    },
+    {
+        "id": "5",
+        "nome": "Nokia Asha 201",
+        "preco": "680",
+        "codigo": "CELNO-24",
+        "estoque": "124",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "laranja",
+                    "preto",
+                    "branco"
+                ]
+            }
+        ],
+        "image_url": "nokia_asha_201.jpeg"
+    },
+    {
+        "id": "6",
+        "nome": "Nokia N9",
+        "preco": "850",
+        "codigo": "CELNO-25",
+        "estoque": "125",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "cinza",
+                    "azul"
+                ]
+            }
+        ],
+        "image_url": "nokia_n9.jpeg"
+    },
+    {
+        "id": "7",
+        "nome": "Nokia N9-00",
+        "preco": "850",
+        "codigo": "CELNO-26",
+        "estoque": "126",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "cinza",
+                    "prata",
+                    "laranja"
+                ]
+            }
+        ],
+        "image_url": "nokia_n9-00.jpeg"
+    },
+    {
+        "id": "8",
+        "nome": "Nokia C2-06",
+        "preco": "720",
+        "codigo": "CELNO-27",
+        "estoque": "127",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "preto",
+                    "vermelho",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_c2-06.jpeg"
+    },
+    {
+        "id": "9",
+        "nome": "Nokia X7-00",
+        "preco": "780",
+        "codigo": "CELNO-28",
+        "estoque": "128",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "preto",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_x7-00.jpeg"
+    },
+    {
+        "id": "10",
+        "nome": "Nokia E6",
+        "preco": "800",
+        "codigo": "CELNO-29",
+        "estoque": "129",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "azul",
+                    "preto",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_e6.jpeg"
+    },
+    {
+        "id": "11",
+        "nome": "Nokia E7",
+        "preco": "790",
+        "codigo": "CELNO-30",
+        "estoque": "130",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "branco",
+                    "vermelho",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_e7.jpeg"
+    },
+    {
+        "id": "12",
+        "nome": "Nokia X1-00",
+        "preco": "700",
+        "codigo": "CELNO-31",
+        "estoque": "131",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "laranja",
+                    "preto",
+                    "branco"
+                ]
+            }
+        ],
+        "image_url": "nokia_x1-00.jpeg"
+    },
+    {
+        "id": "13",
+        "nome": "Nokia X2-01",
+        "preco": "690",
+        "codigo": "CELNO-32",
+        "estoque": "132",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "cinza",
+                    "azul"
+                ]
+            }
+        ],
+        "image_url": "nokia_x2-01.jpeg"
+    },
+    {
+        "id": "14",
+        "nome": "Nokia C5-03",
+        "preco": "880",
+        "codigo": "CELNO-33",
+        "estoque": "133",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "dourado",
+                    "cinza",
+                    "cinza"
+                ]
+            }
+        ],
+        "image_url": "nokia_c5-03.jpeg"
+    },
+    {
+        "id": "15",
+        "nome": "Nokia X3-02",
+        "preco": "870",
+        "codigo": "CELNO-34",
+        "estoque": "134",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "azul",
+                    "cinza",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_x3-02.jpeg"
+    },
+    {
+        "id": "16",
+        "nome": "Nokia 5250",
+        "preco": "890",
+        "codigo": "CELNO-35",
+        "estoque": "135",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "laranja",
+                    "preto",
+                    "branco"
+                ]
+            }
+        ],
+        "image_url": "nokia_5250.jpeg"
+    },
+    {
+        "id": "17",
+        "nome": "Nokia X2",
+        "preco": "450",
+        "codigo": "CELNO-36",
+        "estoque": "136",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "cinza",
+                    "azul"
+                ]
+            }
+        ],
+        "image_url": "nokia_x2.jpeg"
+    },
+    {
+        "id": "18",
+        "nome": "Nokia X6",
+        "preco": "950",
+        "codigo": "CELNO-37",
+        "estoque": "137",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "laranja",
+                    "preto",
+                    "branco"
+                ]
+            }
+        ],
+        "image_url": "nokia_x6.jpeg"
+    },
+    {
+        "id": "19",
+        "nome": "Nokia Lumia 1520",
+        "preco": "550",
+        "codigo": "CELNO-38",
+        "estoque": "138",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "prata",
+                    "cinza",
+                    "azul"
+                ]
+            }
+        ],
+        "image_url": "nokia_lumia_1520.jpeg"
+    },
+    {
+        "id": "20",
+        "nome": "Nokia Lumia 525",
+        "preco": "500",
+        "codigo": "CELNO-39",
+        "estoque": "139",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "dourado",
+                    "cinza",
+                    "cinza"
+                ]
+            }
+        ],
+        "image_url": "nokia_lumia_525.jpeg"
+    },
+    {
+        "id": "21",
+        "nome": "Nokia Lumia 925",
+        "preco": "520",
+        "codigo": "CELNO-40",
+        "estoque": "140",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "azul",
+                    "cinza",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_lumia_925.jpeg"
+    },
+    {
+        "id": "22",
+        "nome": "Nokia Asha 501",
+        "preco": "480",
+        "codigo": "CELNO-41",
+        "estoque": "141",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "preto",
+                    "cinza",
+                    "cinza"
+                ]
+            }
+        ],
+        "image_url": "nokia_asha_501.jpeg"
+    },
+    {
+        "id": "23",
+        "nome": "Nokia Asha 210",
+        "preco": "470",
+        "codigo": "CELNO-42",
+        "estoque": "142",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "dourado",
+                    "cinza",
+                    "cinza"
+                ]
+            }
+        ],
+        "image_url": "nokia_asha_210.jpeg"
+    },
+    {
+        "id": "24",
+        "nome": "Nokia Lumia 720",
+        "preco": "490",
+        "codigo": "CELNO-43",
+        "estoque": "143",
+        "variante": [
+            {
+                "tipo": "cor",
+                "valores": [
+                    "azul",
+                    "cinza",
+                    "prata"
+                ]
+            }
+        ],
+        "image_url": "nokia_lumia_720.jpeg"
+    }
+]
