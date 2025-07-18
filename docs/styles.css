@@ -1,39 +1,78 @@
+/* ====== LISTAGEM DO INVENTÁRIO ======  */
 .product-card {
-            margin-bottom: 20px;
-        }
+    margin-bottom: 20px;
+}
 
-        .product-card img {
-            max-height: 200px;
-            object-fit: contain;
-            width: 100%;
-        }
+.product-card img {
+    max-height: 200px;
+    object-fit: contain;
+    width: 100%;
+}
 
-        .cart-icon-container {
-            position: relative;
-            display: inline-block;
-        }
+/* ====== CARRINHO DE COMPRAS ======  */
+.cart-icon-container {
+    position: relative;
+    display: inline-block;
+}
 
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.75em;
-            line-height: 1;
-            min-width: 20px;
-            text-align: center;
-        }
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75em;
+    line-height: 1;
+    min-width: 20px;
+    text-align: center;
+}
 
-         .cart-item-list {
-            max-height: 300px; /* Limita a altura da lista de itens */
-            overflow-y: auto; /* Adiciona scroll se os itens excederem a altura */
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .cart-item-list div {
-            margin-bottom: 5px;
-        }
+.cart-item-list {
+    max-height: 300px;
+    /* Limita a altura da lista de itens */
+    overflow-y: auto;
+    /* Adiciona scroll se os itens excederem a altura */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart-item-list div {
+    margin-bottom: 5px;
+}
+
+
+/* ====== SELETOR DE CORES DO PRODUTO ======  */
+.color-swatch-label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+.color-swatch {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Esconde o radio input original */
+.color-selector input[type="radio"] {
+    display: none;
+}
+
+/* Estilo quando a cor é selecionada */
+.color-selector input[type="radio"]:checked+.color-swatch {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo no hover */
+.color-swatch-label:hover .color-swatch {
+    border-color: #6c757d;
+}

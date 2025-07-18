@@ -2,11 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const JSON_API_URL = 'https://samuelmendes2025.github.io/ppua4p1/mocks/find_all.json';
     const IMAGE_BASE_PATH = 'images/';
 
+    const colorMap = {
+        "preto": "black",
+        "prata": "silver",
+        "azul": "blue",
+        "branco": "white",
+        "vermelho": "red",
+        "laranja": "orange",
+        "dourado": "gold",
+        "cinza": "gray"
+    };
+
     const productListDiv = document.getElementById('product-list');
     const cartCountSpan = document.getElementById('cart-count');
 
-
-    const openCartModalLink = document.getElementById('open-cart-modal');
     const modalCartItemsDiv = document.getElementById('modal-cart-items');
     const modalCartTotalSpan = document.getElementById('modal-cart-total');
     const emptyCartMessage = document.getElementById('empty-cart-message');
@@ -29,20 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
             modalCartTotalSpan.textContent = 'R$ 0,00';
             return;
         } else {
-             emptyCartMessage.style.display = 'none'; // Esconde a mensagem
+            emptyCartMessage.style.display = 'none'; // Esconde a mensagem
         }
 
         // Contar a quantidade de cada produto no carrinho
         const productQuantities = {};
-        cartItems.forEach(productId => {
-            productQuantities[productId] = (productQuantities[productId] || 0) + 1;
+        cartItems.forEach(product => {
+            const key = `${product.id}`;
+            productQuantities[key] = (productQuantities[key] || 0) || { quantity: 0, color: product.color };
+            productQuantities[key].quantity++;
         });
 
         // Iterar sobre os produtos no carrinho e exibi-los
-        for (const productId in productQuantities) {
-            const quantity = productQuantities[productId];
+        for (const key in productQuantities) {
+            const { quantity, color: selectedColorVariant } = productQuantities[key];
             // Encontrar o produto correspondente nos dados carregados
-            const product = productsData.find(p => p.id === productId);
+            const product = productsData.find(p => p.id === key);
+
+            const displayColor = selectedColorVariant && selectedColorVariant !== 'N/A'
+                ? ` - Cor: ${selectedColorVariant}`
+                : '';
 
             if (product) {
                 const subtotal = parseFloat(product.preco) * quantity;
@@ -50,7 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const itemHtml = `
                     <div>
-                        ${quantity} x [ ${product.codigo} - ${product.nome} ] : <strong>Subtotal R$ ${subtotal.toFixed(2)}</strong>
+                        <span>${product.nome} ${displayColor}</span>
+                        <span>Código: ${product.codigo}</span>
+                        <span>Preço unitário: ${product.preco}</span>
+                        <span>Quantidade: ${quantity}</span>
+                        <strong>Subtotal R$ ${subtotal.toFixed(2)}</strong>
                     </div>
                 `;
                 modalCartItemsDiv.innerHTML += itemHtml;
@@ -83,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 productListDiv.innerHTML = '<p class="text-danger">Erro ao carregar os dados. Verifique a estrutura do JSON.</p>';
                 return;
             }
-
             productsData = products;
 
             products.forEach(product => {
@@ -91,14 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 productCard.classList.add('col-md-4', 'col-sm-6', 'col-12', 'product-card');
 
                 // Lida com as variantes de cor
-                const variantesHtml = product.variante && product.variante.length > 0
-                    ? product.variante.map(v => {
-                        if (v.tipo === "cor" && Array.isArray(v.valores)) {
-                            return `<p class="card-text"><strong>Cores:</strong> ${v.valores.join(', ')}</p>`;
-                        }
-                        return ''; // Retorna string vazia se não for tipo 'cor' ou valores não for array
-                    }).join('')
-                    : ''; // Retorna string vazia se não houver variantes
+                let variantesHtml = '';
+                const colorVariant = product.variante ? product.variante.find(v => v.tipo === 'cor') : null;
+
+                if (colorVariant && Array.isArray(colorVariant.valores) && colorVariant.valores.length > 0) {
+                    variantesHtml = `<p class="card-text"><strong>Cores:</strong></p><div class="color-selector">`;
+                    colorVariant.valores.forEach((color, index) => {
+                        const uniqueId = `color-${product.id}-${color.replace(/\s+/g, '')}-${index}`;
+                        const isChecked = index === 0 ? 'checked' : '';
+
+                        const englishColor = colorMap[color.toLowerCase()] || color;
+
+                        variantesHtml += `
+                            <label for="${uniqueId}" class="color-swatch-label">
+                                <input type="radio" id="${uniqueId}" name="color-selector-${product.id}" value="${color}" ${isChecked}>
+                                <span class="color-swatch" style="background-color: ${englishColor};" title="${color}"></span>
+                            </label>
+                        `;
+                    });
+                    variantesHtml += `</div>`;
+                }
 
                 productCard.innerHTML = `
                     <div class="card h-100 shadow-sm">
@@ -116,13 +146,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 productListDiv.appendChild(productCard);
             });
 
-
             productListDiv.addEventListener('click', (event) => {
                 if (event.target.classList.contains('add-to-cart')) {
                     const productId = event.target.dataset.productId;
-                    cartItems.push(productId);
+
+                    // Variante de cor selecionada
+                    const selectedColorInput = document.querySelector(`input[name="color-selector-${productId}"]:checked`);
+                    const selectedColor = selectedColorInput ? selectedColorInput.value : 'N/A';
+
+                    let newCardItem = {
+                        "id": productId,
+                        "color": selectedColor
+                    };
+
+                    cartItems.push(newCardItem);
                     updateCartCount();
-                    console.log(`Produto ${productId} adicionado ao carrinho!`, cartItems);
+                    console.log(`Produto ${productId} (${selectedColor}) adicionado ao carrinho!`, cartItems);
                 }
             });
         })
