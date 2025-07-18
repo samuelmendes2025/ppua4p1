@@ -1,6 +1,10 @@
 const JSON_API_URL = "https://samuelmendes2025.github.io/ppua4p1/mocks/find_all.json";
-
 const IMAGE_BASE_PATH = "images/";
+const cartCountSpan = document.getElementById("cart-count");
+const productListDiv = document.getElementById("product-list");
+const modalCartItemsDiv = document.getElementById("modal-cart-items");
+const modalCartTotalSpan = document.getElementById("modal-cart-total");
+const emptyCartMessage = document.getElementById("empty-cart-message");
 
 const colorMap = {
   preto: "black",
@@ -13,11 +17,87 @@ const colorMap = {
   cinza: "gray",
 };
 
-function cartProductItem(
-  product,
-  selectedColorVariant,
-  quantity
-) {
+let arrayCartItems = [];
+let numberCartItems = 0;
+let productsData = [];
+
+function populateCartModal() {
+  modalCartItemsDiv.innerHTML = ""; // Limpa o conteúdo anterior da modal
+  let totalCartValue = 0;
+
+  if (arrayCartItems.length === 0) {
+    emptyCartMessage.style.display = "block"; // Mostra a mensagem de carrinho vazio
+    modalCartItemsDiv.appendChild(emptyCartMessage);
+    modalCartTotalSpan.textContent = "R$ 0,00";
+    return;
+  } else {
+    emptyCartMessage.style.display = "none"; // Esconde a mensagem
+  }
+
+  // Contar a quantidade de cada produto no carrinho
+  const cartProductInfo = {};
+  arrayCartItems.forEach((product) => {
+    const key = `${product.id}_${product.color}`;
+    cartProductInfo[key] = cartProductInfo[key] ||
+      0 || { quantity: product.quantity, color: product.color };
+  });
+
+  // Iterar sobre os produtos no carrinho e exibi-los
+  for (const key in cartProductInfo) {
+    const { quantity, color: selectedColorVariant } = cartProductInfo[key];
+    const productId = key.split("_")[0];
+    // Encontrar o produto correspondente nos dados carregados
+    const product = productsData.find((p) => p.id === productId);
+
+    if (product) {
+      const subtotal = parseFloat(product.preco) * quantity;
+      totalCartValue += subtotal;
+
+      const cartItemHtml = cartProductItem(
+        product,
+        selectedColorVariant,
+        quantity
+      );
+      modalCartItemsDiv.innerHTML += cartItemHtml;
+    }
+  }
+
+  // Atualizar o total do carrinho na modal
+  modalCartTotalSpan.textContent = `R$ ${totalCartValue.toFixed(2)}`;
+}
+
+function changeQuantity(targetItem, action) {
+  // Encontra o índice da primeira ocorrência do item para remover
+  const itemIndex = arrayCartItems.findIndex(
+    (item) => item.id === targetItem.id && item.color === targetItem.color
+  );
+  if (action === "increase") {
+    arrayCartItems[itemIndex].quantity++;
+    numberCartItems++;
+  } else if (action === "decrease") {
+    if (arrayCartItems[itemIndex].quantity === 1) {
+      console.log("Removendo item sem unidades!");
+      arrayCartItems.splice(itemIndex, 1); // Remove uma instância do item
+    } else {
+      console.log("Removendo apenas uma unidade!");
+      arrayCartItems[itemIndex].quantity--;
+    }
+    numberCartItems--;
+  }
+
+  updateCartCount();
+  populateCartModal();
+  console.log(
+    `Carrinho atualizado para ${targetItem.id} (${targetItem.color}). Ação: ${action}`
+  );
+  console.table(arrayCartItems);
+}
+
+function updateCartCount() {
+  cartCountSpan.textContent = numberCartItems;
+}
+
+function cartProductItem(product, selectedColorVariant, quantity) {
   const displayColor =
     selectedColorVariant && selectedColorVariant !== "N/A"
       ? ` - Cor: ${selectedColorVariant}`
@@ -120,115 +200,28 @@ function createInventoryProductItemHtml(product) {
   `;
 }
 
+function addItemtToCart(item) {
+  const itemIndex = arrayCartItems.findIndex(
+    (p) => p.id === item.id && p.color === item.color
+  );
+  if (itemIndex > -1) {
+    arrayCartItems[itemIndex].quantity++;
+    numberCartItems++;
+  } else {
+    arrayCartItems.push(item);
+    numberCartItems++;
+  }
+
+  updateCartCount();
+
+  console.log(
+    `Produto ${item.id} (${item.color}) adicionado ao carrinho!`,
+    arrayCartItems
+  );
+  console.table(arrayCartItems);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const productListDiv = document.getElementById("product-list");
-  const cartCountSpan = document.getElementById("cart-count");
-
-  const modalCartItemsDiv = document.getElementById("modal-cart-items");
-  const modalCartTotalSpan = document.getElementById("modal-cart-total");
-  const emptyCartMessage = document.getElementById("empty-cart-message");
-
-  let arrayCartItems = [];
-  let numberCartItems = 0;
-  let productsData = [];
-
-  function updateCartCount() {
-    cartCountSpan.textContent = numberCartItems;
-  }
-
-  function populateCartModal() {
-    modalCartItemsDiv.innerHTML = ""; // Limpa o conteúdo anterior da modal
-    let totalCartValue = 0;
-
-    if (arrayCartItems.length === 0) {
-      emptyCartMessage.style.display = "block"; // Mostra a mensagem de carrinho vazio
-      modalCartItemsDiv.appendChild(emptyCartMessage);
-      modalCartTotalSpan.textContent = "R$ 0,00";
-      return;
-    } else {
-      emptyCartMessage.style.display = "none"; // Esconde a mensagem
-    }
-
-    // Contar a quantidade de cada produto no carrinho
-    const cartProductInfo = {};
-    arrayCartItems.forEach((product) => {
-      const key = `${product.id}_${product.color}`;
-      cartProductInfo[key] = cartProductInfo[key] ||
-        0 || { quantity: product.quantity, color: product.color };
-    });
-
-    // Iterar sobre os produtos no carrinho e exibi-los
-    for (const key in cartProductInfo) {
-      const { quantity, color: selectedColorVariant } = cartProductInfo[key];
-      const productId = key.split("_")[0];
-      // Encontrar o produto correspondente nos dados carregados
-      const product = productsData.find((p) => p.id === productId);
-
-      if (product) {
-        const subtotal = parseFloat(product.preco) * quantity;
-        totalCartValue += subtotal;
-
-        const cartItemHtml = cartProductItem(
-          product,
-          selectedColorVariant,
-          quantity
-        );
-        modalCartItemsDiv.innerHTML += cartItemHtml;
-      }
-    }
-
-    // Atualizar o total do carrinho na modal
-    modalCartTotalSpan.textContent = `R$ ${totalCartValue.toFixed(2)}`;
-  }
-
-  function changeQuantity(targetItem, action) {
-    // Encontra o índice da primeira ocorrência do item para remover
-    const itemIndex = arrayCartItems.findIndex(
-      (item) => item.id === targetItem.id && item.color === targetItem.color
-    );
-    if (action === "increase") {
-      arrayCartItems[itemIndex].quantity++;
-      numberCartItems++;
-    } else if (action === "decrease") {
-      if (arrayCartItems[itemIndex].quantity === 1) {
-        console.log("Removendo item sem unidades!");
-        arrayCartItems.splice(itemIndex, 1); // Remove uma instância do item
-      } else {
-        console.log("Removendo apenas uma unidade!");
-        arrayCartItems[itemIndex].quantity--;
-      }
-      numberCartItems--;
-    }
-
-    updateCartCount();
-    populateCartModal();
-    console.log(
-      `Carrinho atualizado para ${targetItem.id} (${targetItem.color}). Ação: ${action}`
-    );
-    console.table(arrayCartItems);
-  }
-
-  function addItemtToCart(item) {
-    const itemIndex = arrayCartItems.findIndex(
-      (p) => p.id === item.id && p.color === item.color
-    );
-    if (itemIndex > -1) {
-      arrayCartItems[itemIndex].quantity++;
-      numberCartItems++;
-    } else {
-      arrayCartItems.push(item);
-      numberCartItems++;
-    }
-
-    updateCartCount();
-
-    console.log(
-      `Produto ${item.id} (${item.color}) adicionado ao carrinho!`,
-      arrayCartItems
-    );
-    console.table(arrayCartItems);
-  }
-
   // Event listener para quando a modal for exibida (usando eventos do Bootstrap)
   // Isso garante que a modal seja preenchida sempre que for aberta
   const cartModalElement = document.getElementById("cartModal");
@@ -294,9 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
           variantesHtml += `</div>`;
         }
 
-        productCard.innerHTML = createInventoryProductItemHtml(
-          product
-        );
+        productCard.innerHTML = createInventoryProductItemHtml(product);
         productListDiv.appendChild(productCard);
       });
 
