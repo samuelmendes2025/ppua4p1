@@ -1,5 +1,5 @@
 # ppua4p1
-Projeto Mão na Massa da Disciplina Práticas de Programação e é uma aplicação web simples que simula um inventário de produtos(catálogo) e um carrinho de compras, tem design responsivo e interatividade. Os dados dos produtos são carregados dinamicamente de um mock de API [find_all.json](/mocks/find_all.json)
+Projeto Mão na Massa da Disciplina Práticas de Programação e é uma aplicação web simples que simula um inventário de produtos(catálogo) e um carrinho de compras, tem design responsivo e interatividade. Os dados dos produtos são carregados dinamicamente de um mock de API [find_all.json](docs/mocks/find_all.json)
 
 ## Tecnologias
 
